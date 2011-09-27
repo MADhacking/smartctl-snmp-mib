@@ -51,6 +51,7 @@ smartCtlEntry OBJECT-TYPE
    	smartCtlDeviceCurrentPendingSector   	Gauge32,
    	smartCtlDeviceOfflineUncorrectable  	Gauge32,
    	smartCtlDeviceUDMACRCErrorCount   		Gauge32,
+   	smartCtlDeviceReadErrorRate			   	Gauge32,
    	smartCtlDeviceSeekErrorRate			   	Gauge32,
    	smartCtlDeviceHardwareECCRecovered   	Gauge32
 }
@@ -139,18 +140,25 @@ smartCtlDeviceUDMACRCErrorCount OBJECT-TYPE
     DESCRIPTION "The current UDMA CRC Error Count on this device."
     ::= { smartCtlEntry 12 }
 
+smartCtlDeviceReadErrorRate OBJECT-TYPE
+    SYNTAX      Gauge32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The current Read Error Rate on this device."
+    ::= { smartCtlEntry 13 }
+
 smartCtlDeviceSeekErrorRate OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The current Seek Error Rate on this device."
-    ::= { smartCtlEntry 13 }
+    ::= { smartCtlEntry 14 }
 
 smartCtlDeviceHardwareECCRecovered OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The current Hardware ECC Recovered Count on this device."
-    ::= { smartCtlEntry 14 }
+    ::= { smartCtlEntry 15 }
 
 END
