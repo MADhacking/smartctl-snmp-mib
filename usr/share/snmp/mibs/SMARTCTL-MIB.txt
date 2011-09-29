@@ -7,8 +7,8 @@ IMPORTS
         FROM SNMPv2-SMI
     DisplayString
         FROM SNMPv2-TC
-    ucdExperimental
-        FROM UCD-SNMP-MIB;
+    hackingExperimental
+        FROM HACKING-SNMP-MIB;
 
 smartCtlMIB MODULE-IDENTITY
 	LAST-UPDATED 	"201109260000Z"
@@ -19,7 +19,7 @@ smartCtlMIB MODULE-IDENTITY
 	DESCRIPTION		"Derived from DISKIO-MIB ex UCD."
     ::= { smartCtl 1 }
 
-smartCtl      OBJECT IDENTIFIER ::= { ucdExperimental 666 }
+smartCtl      OBJECT IDENTIFIER ::= { hackingExperimental 1 }
 
 --
 
