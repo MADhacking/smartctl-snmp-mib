@@ -5,7 +5,7 @@ SMARTCTL-MIB DEFINITIONS ::= BEGIN
 IMPORTS
     MODULE-IDENTITY, OBJECT-TYPE, Integer32, Gauge32
         FROM SNMPv2-SMI
-    DisplayString
+    DisplayString, TruthValue
         FROM SNMPv2-TC
     hackingExperimental
         FROM HACKING-SNMP-MIB;
@@ -46,6 +46,7 @@ smartCtlEntry OBJECT-TYPE
    	smartCtlDeviceSerialNumber				DisplayString,
    	smartCtlDeviceUserCapacity				DisplayString,
    	smartCtlDeviceATAVersion				DisplayString,
+   	smartCtlDeviceHealthOK					TruthValue,
    	smartCtlDeviceTemperatureCelsius   		Gauge32,
    	smartCtlDeviceReallocatedSectorCt		Gauge32,
    	smartCtlDeviceCurrentPendingSector   	Gauge32,
@@ -105,60 +106,67 @@ smartCtlDeviceATAVersion OBJECT-TYPE
     DESCRIPTION "The ATA Version supported by this device."
     ::= { smartCtlEntry 7 }
 
+smartCtlDeviceHealthOK OBJECT-TYPE
+    SYNTAX      TruthValue
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The current SMART health status reported by this device."
+    ::= { smartCtlEntry 8 }
+
 smartCtlDeviceTemperatureCelsius OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The current Temperature in degrees Celsius of this device."
-    ::= { smartCtlEntry 8 }
+    ::= { smartCtlEntry 9 }
 
 smartCtlDeviceReallocatedSectorCt OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The number of Reallocated Sectors on this device."
-    ::= { smartCtlEntry 9 }
+    ::= { smartCtlEntry 10 }
 
 smartCtlDeviceCurrentPendingSector OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The number of Current Pending Sectors on this device."
-    ::= { smartCtlEntry 10 }
+    ::= { smartCtlEntry 11 }
     
 smartCtlDeviceOfflineUncorrectable OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The number of Off-line Uncorrectable Sectors on this device."
-    ::= { smartCtlEntry 11 }
+    ::= { smartCtlEntry 12 }
 
 smartCtlDeviceUDMACRCErrorCount OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The current UDMA CRC Error Count on this device."
-    ::= { smartCtlEntry 12 }
+    ::= { smartCtlEntry 13 }
 
 smartCtlDeviceReadErrorRate OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The current Read Error Rate on this device."
-    ::= { smartCtlEntry 13 }
+    ::= { smartCtlEntry 14 }
 
 smartCtlDeviceSeekErrorRate OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The current Seek Error Rate on this device."
-    ::= { smartCtlEntry 14 }
+    ::= { smartCtlEntry 15 }
 
 smartCtlDeviceHardwareECCRecovered OBJECT-TYPE
     SYNTAX      Gauge32
     MAX-ACCESS  read-only
     STATUS      current
     DESCRIPTION "The current Hardware ECC Recovered Count on this device."
-    ::= { smartCtlEntry 15 }
+    ::= { smartCtlEntry 16 }
 
 END
