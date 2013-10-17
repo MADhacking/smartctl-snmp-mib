@@ -54,7 +54,8 @@ smartCtlEntry OBJECT-TYPE
    	smartCtlDeviceUDMACRCErrorCount   		Gauge32,
    	smartCtlDeviceReadErrorRate			   	Gauge32,
    	smartCtlDeviceSeekErrorRate			   	Gauge32,
-   	smartCtlDeviceHardwareECCRecovered   	Gauge32
+   	smartCtlDeviceHardwareECCRecovered   	Gauge32,
+   	smartCtlDeviceFirmwareVersion			DisplayString
 }
 
 smartCtlDeviceIndex OBJECT-TYPE
@@ -168,5 +169,12 @@ smartCtlDeviceHardwareECCRecovered OBJECT-TYPE
     STATUS      current
     DESCRIPTION "The current Hardware ECC Recovered Count on this device."
     ::= { smartCtlEntry 16 }
+
+smartCtlDeviceFirmwareVersion OBJECT-TYPE
+	SYNTAX DisplayString
+	MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The current Firmware Version installed on this device."
+    ::= { smartCtlEntry 17 }
 
 END
