@@ -11,11 +11,11 @@ IMPORTS
         FROM HACKING-SNMP-MIB;
 
 smartCtlMIB MODULE-IDENTITY
-	LAST-UPDATED 	"201109260000Z"
+	LAST-UPDATED 	"201902120000Z"
 	ORGANIZATION 	"Hacking Networked Solutions Ltd"
 	CONTACT-INFO	"Max Hacking"
 	DESCRIPTION		"This MIB module defines objects for HDD SMART data."
-	REVISION     	"201109260000Z"
+	REVISION     	"201902120000Z"
 	DESCRIPTION		"Derived from DISKIO-MIB ex UCD."
     ::= { smartCtl 1 }
 
@@ -55,7 +55,10 @@ smartCtlEntry OBJECT-TYPE
    	smartCtlDeviceReadErrorRate			   	Gauge32,
    	smartCtlDeviceSeekErrorRate			   	Gauge32,
    	smartCtlDeviceHardwareECCRecovered   	Gauge32,
-   	smartCtlDeviceFirmwareVersion			DisplayString
+   	smartCtlDeviceFirmwareVersion			DisplayString,
+   	smartCtlDeviceSSDLifeLeft		Gauge32,
+   	smartCtlDevicePowerCycleCount		Gauge32,
+   	smartCtlDevicePowerOnHours		Gauge32
 }
 
 smartCtlDeviceIndex OBJECT-TYPE
@@ -176,5 +179,26 @@ smartCtlDeviceFirmwareVersion OBJECT-TYPE
     STATUS      current
     DESCRIPTION "The current Firmware Version installed on this device."
     ::= { smartCtlEntry 17 }
+
+smartCtlDeviceSSDLifeLeft OBJECT-TYPE
+    SYNTAX      Gauge32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The current SSD Life Left on this device."
+    ::= { smartCtlEntry 18 }
+
+smartCtlDevicePowerCycleCount OBJECT-TYPE
+    SYNTAX      Gauge32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The current Power Cycle Count on this device."
+    ::= { smartCtlEntry 19 }
+
+smartCtlDevicePowerOnHours OBJECT-TYPE
+    SYNTAX      Gauge32
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The current Power On Hours on this device."
+    ::= { smartCtlEntry 20 }
 
 END
