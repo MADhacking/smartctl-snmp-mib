@@ -3,202 +3,250 @@ SMARTCTL-MIB DEFINITIONS ::= BEGIN
 -- imports and exports
 
 IMPORTS
-    MODULE-IDENTITY, OBJECT-TYPE, Integer32, Gauge32
-        FROM SNMPv2-SMI
-    DisplayString, TruthValue
-        FROM SNMPv2-TC
-    hackingExperimental
-        FROM HACKING-SNMP-MIB;
+	MODULE-COMPLIANCE, OBJECT-GROUP
+		FROM SNMPv2-CONF
+	MODULE-IDENTITY, OBJECT-TYPE, Integer32, Gauge32
+		FROM SNMPv2-SMI
+	DisplayString, TruthValue
+		FROM SNMPv2-TC
+	hackingInternal, hackingExperimental
+		FROM HACKING-SNMP-MIB;
 
 smartCtlMIB MODULE-IDENTITY
-	LAST-UPDATED 	"201902120000Z"
-	ORGANIZATION 	"Hacking Networked Solutions Ltd"
+	LAST-UPDATED	"201902120000Z"
+	ORGANIZATION	"Hacking Networked Solutions Ltd"
 	CONTACT-INFO	"Max Hacking"
 	DESCRIPTION		"This MIB module defines objects for HDD SMART data."
-	REVISION     	"201902120000Z"
+	REVISION		"201902120000Z"
 	DESCRIPTION		"Derived from DISKIO-MIB ex UCD."
-    ::= { smartCtl 1 }
+	::= { smartCtl 1 }
 
-smartCtl      OBJECT IDENTIFIER ::= { hackingExperimental 1 }
+smartCtl				OBJECT IDENTIFIER ::= { hackingExperimental 1 }
+smartCtlMIBConformance	OBJECT IDENTIFIER ::= { hackingInternal 1 }
 
 --
 
 smartCtlTable OBJECT-TYPE
-    SYNTAX      SEQUENCE OF SsmartCtlEntry
-    MAX-ACCESS  not-accessible
-    STATUS      current
-    DESCRIPTION "Table of HDD SMART information."
-    ::= { smartCtl 2 }
+	SYNTAX		SEQUENCE OF SsmartCtlEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION "Table of HDD SMART information."
+	::= { smartCtl 2 }
 
 smartCtlEntry OBJECT-TYPE
-    SYNTAX      SsmartCtlEntry
-    MAX-ACCESS  not-accessible
-    STATUS      current
-    DESCRIPTION "An entry containing a device and its statistics."
-    INDEX       { smartCtlDeviceIndex }
-    ::= { smartCtlTable 1 }
-    
-    SsmartCtlEntry ::= SEQUENCE {
-   	smartCtlDeviceIndex						Integer32,
-   	smartCtlDeviceDev						DisplayString,
-   	smartCtlDeviceModelFamily				DisplayString,
-   	smartCtlDeviceDeviceModel				DisplayString,
-   	smartCtlDeviceSerialNumber				DisplayString,
-   	smartCtlDeviceUserCapacity				DisplayString,
-   	smartCtlDeviceATAVersion				DisplayString,
-   	smartCtlDeviceHealthOK					TruthValue,
-   	smartCtlDeviceTemperatureCelsius   		Gauge32,
-   	smartCtlDeviceReallocatedSectorCt		Gauge32,
-   	smartCtlDeviceCurrentPendingSector   	Gauge32,
-   	smartCtlDeviceOfflineUncorrectable  	Gauge32,
-   	smartCtlDeviceUDMACRCErrorCount   		Gauge32,
-   	smartCtlDeviceReadErrorRate			   	Gauge32,
-   	smartCtlDeviceSeekErrorRate			   	Gauge32,
-   	smartCtlDeviceHardwareECCRecovered   	Gauge32,
-   	smartCtlDeviceFirmwareVersion			DisplayString,
-   	smartCtlDeviceSSDLifeLeft		Gauge32,
-   	smartCtlDevicePowerCycleCount		Gauge32,
-   	smartCtlDevicePowerOnHours		Gauge32
+	SYNTAX		SsmartCtlEntry
+	MAX-ACCESS	not-accessible
+	STATUS		current
+	DESCRIPTION "An entry containing a device and its statistics."
+	INDEX		{ smartCtlDeviceIndex }
+	::= { smartCtlTable 1 }
+	
+	SsmartCtlEntry ::= SEQUENCE {
+	smartCtlDeviceIndex						Integer32,
+	smartCtlDeviceDev						DisplayString,
+	smartCtlDeviceModelFamily				DisplayString,
+	smartCtlDeviceDeviceModel				DisplayString,
+	smartCtlDeviceSerialNumber				DisplayString,
+	smartCtlDeviceUserCapacity				DisplayString,
+	smartCtlDeviceATAVersion				DisplayString,
+	smartCtlDeviceHealthOK					TruthValue,
+	smartCtlDeviceTemperatureCelsius		Gauge32,
+	smartCtlDeviceReallocatedSectorCt		Gauge32,
+	smartCtlDeviceCurrentPendingSector		Gauge32,
+	smartCtlDeviceOfflineUncorrectable		Gauge32,
+	smartCtlDeviceUDMACRCErrorCount			Gauge32,
+	smartCtlDeviceReadErrorRate				Gauge32,
+	smartCtlDeviceSeekErrorRate				Gauge32,
+	smartCtlDeviceHardwareECCRecovered		Gauge32,
+	smartCtlDeviceFirmwareVersion			DisplayString,
+	smartCtlDeviceSSDLifeLeft				Gauge32,
+	smartCtlDevicePowerCycleCount			Gauge32,
+	smartCtlDevicePowerOnHours				Gauge32
 }
 
 smartCtlDeviceIndex OBJECT-TYPE
-    SYNTAX      Integer32 (0..65535)
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "Reference index for each observed device."
-    ::= { smartCtlEntry 1 }
-    
+	SYNTAX		Integer32 (0..65535)
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "Reference index for each observed device."
+	::= { smartCtlEntry 1 }
+	
 smartCtlDeviceDev OBJECT-TYPE
-    SYNTAX      DisplayString
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The path to the DEV entry for this device."
-    ::= { smartCtlEntry 2 }
-    
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The path to the DEV entry for this device."
+	::= { smartCtlEntry 2 }
+	
 smartCtlDeviceModelFamily OBJECT-TYPE
-    SYNTAX      DisplayString
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The Model Family string for this device."
-    ::= { smartCtlEntry 3 }
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The Model Family string for this device."
+	::= { smartCtlEntry 3 }
 
 smartCtlDeviceDeviceModel OBJECT-TYPE
-    SYNTAX      DisplayString
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The Device Model string for this device."
-    ::= { smartCtlEntry 4 }
-    
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The Device Model string for this device."
+	::= { smartCtlEntry 4 }
+	
 smartCtlDeviceSerialNumber OBJECT-TYPE
-    SYNTAX      DisplayString
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The Serial Number for this device."
-    ::= { smartCtlEntry 5 }
-    
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The Serial Number for this device."
+	::= { smartCtlEntry 5 }
+	
 smartCtlDeviceUserCapacity OBJECT-TYPE
-    SYNTAX      DisplayString
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The User Capacity for this device."
-    ::= { smartCtlEntry 6 }
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The User Capacity for this device."
+	::= { smartCtlEntry 6 }
 
 smartCtlDeviceATAVersion OBJECT-TYPE
-    SYNTAX      DisplayString
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The ATA Version supported by this device."
-    ::= { smartCtlEntry 7 }
+	SYNTAX		DisplayString
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The ATA Version supported by this device."
+	::= { smartCtlEntry 7 }
 
 smartCtlDeviceHealthOK OBJECT-TYPE
-    SYNTAX      TruthValue
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current SMART health status reported by this device."
-    ::= { smartCtlEntry 8 }
+	SYNTAX		TruthValue
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current SMART health status reported by this device."
+	::= { smartCtlEntry 8 }
 
 smartCtlDeviceTemperatureCelsius OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current Temperature in degrees Celsius of this device."
-    ::= { smartCtlEntry 9 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current Temperature in degrees Celsius of this device."
+	::= { smartCtlEntry 9 }
 
 smartCtlDeviceReallocatedSectorCt OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The number of Reallocated Sectors on this device."
-    ::= { smartCtlEntry 10 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The number of Reallocated Sectors on this device."
+	::= { smartCtlEntry 10 }
 
 smartCtlDeviceCurrentPendingSector OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The number of Current Pending Sectors on this device."
-    ::= { smartCtlEntry 11 }
-    
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The number of Current Pending Sectors on this device."
+	::= { smartCtlEntry 11 }
+	
 smartCtlDeviceOfflineUncorrectable OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The number of Off-line Uncorrectable Sectors on this device."
-    ::= { smartCtlEntry 12 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The number of Off-line Uncorrectable Sectors on this device."
+	::= { smartCtlEntry 12 }
 
 smartCtlDeviceUDMACRCErrorCount OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current UDMA CRC Error Count on this device."
-    ::= { smartCtlEntry 13 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current UDMA CRC Error Count on this device."
+	::= { smartCtlEntry 13 }
 
 smartCtlDeviceReadErrorRate OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current Read Error Rate on this device."
-    ::= { smartCtlEntry 14 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current Read Error Rate on this device."
+	::= { smartCtlEntry 14 }
 
 smartCtlDeviceSeekErrorRate OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current Seek Error Rate on this device."
-    ::= { smartCtlEntry 15 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current Seek Error Rate on this device."
+	::= { smartCtlEntry 15 }
 
 smartCtlDeviceHardwareECCRecovered OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current Hardware ECC Recovered Count on this device."
-    ::= { smartCtlEntry 16 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current Hardware ECC Recovered Count on this device."
+	::= { smartCtlEntry 16 }
 
 smartCtlDeviceFirmwareVersion OBJECT-TYPE
 	SYNTAX DisplayString
-	MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current Firmware Version installed on this device."
-    ::= { smartCtlEntry 17 }
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current Firmware Version installed on this device."
+	::= { smartCtlEntry 17 }
 
 smartCtlDeviceSSDLifeLeft OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current SSD Life Left on this device."
-    ::= { smartCtlEntry 18 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current SSD Life Left on this device."
+	::= { smartCtlEntry 18 }
 
 smartCtlDevicePowerCycleCount OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current Power Cycle Count on this device."
-    ::= { smartCtlEntry 19 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current Power Cycle Count on this device."
+	::= { smartCtlEntry 19 }
 
 smartCtlDevicePowerOnHours OBJECT-TYPE
-    SYNTAX      Gauge32
-    MAX-ACCESS  read-only
-    STATUS      current
-    DESCRIPTION "The current Power On Hours on this device."
-    ::= { smartCtlEntry 20 }
+	SYNTAX		Gauge32
+	MAX-ACCESS	read-only
+	STATUS		current
+	DESCRIPTION "The current Power On Hours on this device."
+	::= { smartCtlEntry 20 }
 
+-- Conformance information ******************************************
+
+smartCtlMIBCompliances OBJECT IDENTIFIER ::= {smartCtlMIBConformance 1}
+smartCtlMIBGroups	   OBJECT IDENTIFIER ::= {smartCtlMIBConformance 2}
+
+-- Compliance statements
+
+smartCtlCompliance MODULE-COMPLIANCE
+	STATUS		 current
+	DESCRIPTION "The compliance statement for SNMP entities which
+				 implement the SMARTCTL-MIB."
+
+	MODULE	  -- this module
+		MANDATORY-GROUPS { smartCtlGroup }
+	::= { smartCtlMIBCompliances 1 }
+
+smartCtlGroup OBJECT-GROUP
+	OBJECTS 
+	{
+		smartCtlDeviceIndex,
+		smartCtlDeviceDev,
+		smartCtlDeviceModelFamily,
+		smartCtlDeviceDeviceModel,
+		smartCtlDeviceSerialNumber,
+		smartCtlDeviceUserCapacity,
+		smartCtlDeviceATAVersion,
+		smartCtlDeviceHealthOK,
+		smartCtlDeviceTemperatureCelsius,
+		smartCtlDeviceReallocatedSectorCt,
+		smartCtlDeviceCurrentPendingSector,
+		smartCtlDeviceOfflineUncorrectable,
+		smartCtlDeviceUDMACRCErrorCount,
+		smartCtlDeviceReadErrorRate,
+		smartCtlDeviceSeekErrorRate,
+		smartCtlDeviceHardwareECCRecovered,
+		smartCtlDeviceFirmwareVersion,
+		smartCtlDeviceSSDLifeLeft,
+		smartCtlDevicePowerCycleCount,
+		smartCtlDevicePowerOnHours
+	}
+	STATUS		 current
+	DESCRIPTION "A collection of objects providing for remote
+				 monitoring of HDD SMART data."
+	::= { smartCtlMIBGroups 1 }
+	
 END
