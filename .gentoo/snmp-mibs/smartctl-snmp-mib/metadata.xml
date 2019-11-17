@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+
+<pkgmetadata>
+    <maintainer type="person">
+        <email>overlay-maintainer@mad-hacking.net</email>
+        <name>Overlay Maintainer</name>
+    </maintainer>
+    <upstream>
+        <maintainer>
+            <email>default-package-maintainer@mad-hacking.net</email>
+            <name>Default Package Maintainer</name>
+        </maintainer>
+        <bugs-to>https://github.com/MADhacking/smartctl-snmp-mib/issues</bugs-to>
+        <doc>https://github.com/MADhacking/smartctl-snmp-mib</doc>
+    </upstream>
+</pkgmetadata>

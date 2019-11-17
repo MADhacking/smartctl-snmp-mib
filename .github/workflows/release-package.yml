@@ -1,0 +1,17 @@
+name: Release Package
+
+on:
+  release:
+    types: [published, edited]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: hacking-gentoo/action-ebuild-release@master
+      with:
+        overlay: MADhacking/overlay
+        overlay_branch: staging
+      env:
+        GHA_DEPLOY_KEY: ${{ secrets.GHA_DEPLOY_KEY }}
