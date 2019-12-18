@@ -5,6 +5,7 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - '.github/*'
 
 jobs:
   tests:
