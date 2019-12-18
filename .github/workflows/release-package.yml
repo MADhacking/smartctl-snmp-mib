@@ -9,9 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: hacking-gentoo/action-ebuild-release@master
+    - uses: hacking-gentoo/action-ebuild-release@next
       with:
-        overlay: MADhacking/overlay
-        overlay_branch: staging
-      env:
-        GHA_DEPLOY_KEY: ${{ secrets.GHA_DEPLOY_KEY }}
+        auth_token: ${{ secrets.PR_TOKEN }}
+        deploy_key: ${{ secrets.GHA_DEPLOY_KEY }}
+        overlay_repo: MADhacking/overlay
