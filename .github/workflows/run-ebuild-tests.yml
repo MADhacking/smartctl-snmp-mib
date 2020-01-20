@@ -47,4 +47,8 @@ jobs:
           binpkgs
 
     # Run the ebuild tests
-    - uses: hacking-gentoo/action-ebuild-test@master
+    - uses: hacking-gentoo/action-ebuild-test@next
+      with:
+        auth_token: ${{ secrets.PR_TOKEN }}
+        deploy_key: ${{ secrets.DEPLOY_KEY }}
+        overlay_repo: MADhacking/overlay
